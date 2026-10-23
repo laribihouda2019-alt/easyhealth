@@ -30,7 +30,7 @@ const ENV = {
   CHARGILY_SECRET_KEY: process.env.CHARGILY_SECRET_KEY,
 
   //frontend URL for payment redirects
-  FRONTEND_URL: process.env.FRONTEND_URL || 'http://localhost:8080',
+  FRONTEND_URL: process.env.FRONTEND_URL || 'https://web-three-omega-76.vercel.app',
 };
 
 module.exports = ENV;

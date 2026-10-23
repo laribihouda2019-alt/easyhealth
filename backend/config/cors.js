@@ -1,8 +1,15 @@
 const cors = require('cors');
 const ENV = require('./env');
 
+// Production origins that are always allowed (in addition to CORS_ORIGINS env var)
+const PRODUCTION_ORIGINS = [
+  'https://web-three-omega-76.vercel.app',
+  'https://easyhealth-frontend.vercel.app',
+  'https://easy-frontend-jfbn.onrender.com',
+];
+
 function buildCorsOptions() {
-  const allowedOrigins = ENV.CORS_ORIGINS;
+  const allowedOrigins = [...ENV.CORS_ORIGINS, ...PRODUCTION_ORIGINS];
   const isDev = ENV.NODE_ENV !== 'production';
 
   return {
@@ -21,6 +28,11 @@ function buildCorsOptions() {
         origin.startsWith('devtools://')
       )) {
         return callback(null, true); //all preced accepte
+      }
+
+      //allow any vercel.app subdomain (for preview deployments)
+      if (origin.endsWith('.vercel.app')) {
+        return callback(null, true);
       }
 
       //check against explicit allowed origins
