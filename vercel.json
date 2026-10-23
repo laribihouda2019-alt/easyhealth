@@ -1,15 +1,6 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "frontend/build/web/**",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/frontend/build/web/$1"
-    }
+  "outputDirectory": "frontend/build/web",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
