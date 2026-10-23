@@ -1,0 +1,8 @@
+You are an expert full-stack developer. 
+Project: EasyHealth Platform (Web & Mobile).
+Stack: Flutter, Node.js (Modular Express), Supabase.
+Rules: 
+- Always use modular structure (controllers, routes, services).
+- Keep AI logic in the 'services' layer as placeholders for custom models.
+- Save tokens by being concise and referencing files with @.
+- Ensure all medical data is handled securely and doctors/pharmacies/labs need admin approval.
