@@ -1,15 +1,18 @@
 const cors = require('cors');
 const ENV = require('./env');
 
-// Production origins that are always allowed (in addition to CORS_ORIGINS env var)
+// Production Vercel frontend URLs - always allowed
 const PRODUCTION_ORIGINS = [
   'https://web-three-omega-76.vercel.app',
+  'https://web-7g9bp9355-easyhealth1.vercel.app',
   'https://easyhealth-frontend.vercel.app',
-  'https://easy-frontend-jfbn.onrender.com',
 ];
 
 function buildCorsOptions() {
-  const allowedOrigins = [...ENV.CORS_ORIGINS, ...PRODUCTION_ORIGINS];
+  const allowedOrigins = [
+    ...PRODUCTION_ORIGINS,
+    ...ENV.CORS_ORIGINS,
+  ];
   const isDev = ENV.NODE_ENV !== 'production';
 
   return {
@@ -23,15 +26,20 @@ function buildCorsOptions() {
       if (isDev && (
         origin.startsWith('http://localhost') ||
         origin.startsWith('http://127.0.0.1') ||
-        origin.startsWith('https://localhost') || //for local service workers 
+        origin.startsWith('https://localhost') ||
         origin.startsWith('chrome-extension://') ||
         origin.startsWith('devtools://')
       )) {
-        return callback(null, true); //all preced accepte
+        return callback(null, true);
       }
 
-      //allow any vercel.app subdomain (for preview deployments)
+      // Allow all vercel.app subdomains for demo robustness
       if (origin.endsWith('.vercel.app')) {
+        return callback(null, true);
+      }
+
+      // Allow onrender.com for service-to-service calls
+      if (origin.endsWith('.onrender.com')) {
         return callback(null, true);
       }
 
