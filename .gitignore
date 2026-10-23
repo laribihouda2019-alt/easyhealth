@@ -10,8 +10,11 @@ node_modules/
 .env.test.local
 .env.production.local
 
-# Build artifacts
+# Build artifacts (keep web build for Vercel static deploy)
 frontend/build/
+!frontend/build/web/
+!frontend/build/web/**
+frontend/build/web/.last_build_id
 frontend/.flutter-plugins
 frontend/.flutter-plugins-dependencies
 
